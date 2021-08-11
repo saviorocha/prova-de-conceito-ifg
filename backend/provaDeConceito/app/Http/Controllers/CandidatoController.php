@@ -17,11 +17,9 @@ class CandidatoController extends Controller
      */
     public function index()
     {
-        $candidatos = (new CandidatoService)->listAll();
-        if (!$candidatos) {
-            return $this->errorResponse('Candidatos não encontrados');
-        }
-        return $this->successList($candidatos);
+        return $this->successList(
+            (new CandidatoService)->listAll()
+        );
     }
 
 
@@ -33,11 +31,9 @@ class CandidatoController extends Controller
      */
     public function show(int $id)
     {
-        $candidato = (new CandidatoService)->findById($id);
-        if (!$candidato) {
-            return $this->errorResponse('Candidato não encontrado');
-        }
-        return $this->successResponse($candidato);
+        return $this->successList(
+            (new CandidatoService)->findById($id)
+        );
     }
 
     /**
@@ -48,11 +44,9 @@ class CandidatoController extends Controller
      */
     public function store(CandidatoRequest $request)
     {
-        $candidato = (new CandidatoService)->create($request);
-        if (!$candidato) {
-            return $this->errorResponse('Erro ao cadastrar o candidato');
-        }
-        return $this->successSave($candidato);
+        return $this->successSave(
+            (new CandidatoService)->create($request)
+        );
     }
 
     /**
@@ -64,11 +58,9 @@ class CandidatoController extends Controller
      */
     public function update(CandidatoRequest $request, int $id)
     {
-        $candidato = (new CandidatoService)->update($id, $request);
-        if (!$candidato) {
-            return $this->errorResponse('Erro ao atualizar o candidato');
-        }
-        return $this->successResponse('Registro atualizado com sucesso', $candidato);
+        return $this->successSave(
+            (new CandidatoService)->update($id, $request)
+        );
     }
 
     /**
