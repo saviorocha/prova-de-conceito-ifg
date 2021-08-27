@@ -13,7 +13,7 @@ class CandidatoRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,17 +24,9 @@ class CandidatoRequest extends FormRequest
     public function rules()
     {
         return [
-            "nome"                => ["required"],
-            "sobrenome"           => ["required"],
-            "sobrenome"           => ["required"],
-            "email"               => ["required"],
-            "telefone"            => ["required"],
-            "sexo"                => ["required"],
-            "dataNascimento"      => ["required"],
-            "tipoUsuario"         => ["required"],
-            "CPF"                 => ["required"],
-            "areaAtuacao"         => ["required"],
-            "CEP"                 => ["required"],
+            "area_atuacao"         => ["required"],
+            "cep"                  => ["required"],
+            "id_usuario"           => ["required"],
         ];
     }
 }

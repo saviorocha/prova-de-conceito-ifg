@@ -1,15 +1,10 @@
 <?php
 
-namespace App\Services;
+namespace App\Http\Services;
 
 use App\Http\Requests\CandidatoRequest;
-use App\Http\Requests\Formulario\Administracao\Cadastro\Usuario\UsuarioRequest;
-use App\Jobs\Cadastro\Usuario\SendEmailCadastroServidorJob;
-use App\Models\Cadastro\Usuario\Usuario;
-use App\Models\Cadastro\Usuario\UsuarioEndereco;
 use App\Models\Candidato;
-use App\Services\Auth\GerarSenhaTemporaria;
-use App\Services\Helper\Message\BaseResponseMessage;
+use App\Models\Usuario;
 
 class CandidatoService
 {
@@ -26,13 +21,13 @@ class CandidatoService
 
     /**
      * Lista o candidato por ID
-     * @param int $idCandidato
+     * @param int $id
      * @return \App\Models\Candidato
      * @author Sávio de Melo
      */
-    public function findById(int $idCandidato)
+    public function findById(int $id)
     {
-        return Candidato::find($idCandidato);
+        return Candidato::find($id);
     }
 
     /**
@@ -43,7 +38,9 @@ class CandidatoService
      */
     public function create(CandidatoRequest $request)
     {
-        return Candidato::create($request->all());
+        $candidato = Candidato::create($request->all());
+        $candidato->usuario()->save(Usuario::find($request->id_usuario));
+        return $candidato;
     }
 
     /**
@@ -55,7 +52,9 @@ class CandidatoService
      */
     public function update(int $candidatoId, CandidatoRequest $request)
     {
-        return Candidato::whereId($candidatoId)->update($request->all());
+        $candidato = Candidato::whereId($candidatoId)->update($request->all());
+        $candidato->usuario()->save(Usuario::find($request->id_usuario));
+        return $candidato;
     }
 
     /**

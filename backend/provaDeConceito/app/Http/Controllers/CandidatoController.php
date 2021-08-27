@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Api\Administracao\Cadastro\Candidato;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CandidatoRequest;
+use App\Http\Services\CandidatoService;
 use App\Models\Candidato;
-use App\Services\CandidatoService;
 
 class CandidatoController extends Controller
 {

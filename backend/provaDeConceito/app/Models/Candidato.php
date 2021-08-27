@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Candidato extends Model
 {
     use HasFactory;
+    protected $guarded = [];
     public $table = 'candidatos';
     public $fillable = [
         "nome",
@@ -22,4 +23,9 @@ class Candidato extends Model
         "areaAtuacao",
         "CEP",
     ];
+
+    public function usuario()
+    {
+        return $this->morphOne('App\Models\Usuario', 'usuario');
+    }
 }
