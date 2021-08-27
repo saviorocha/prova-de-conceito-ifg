@@ -4,7 +4,7 @@ export const Login = () => {
     return (
         <>
             <form>
-                <div class="container">
+                <div className="container">
                     <label>Email: </label>
                     <input type="text" placeholder="Insira seu e-mail" name="username" required />
                     <label>Senha: </label>
